@@ -1,24 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import ProtectedRoute from './components/routes/ProtectedRoute';
+import AirInformation from './components/airInformation/AirInformation'
+import Form from './components/Form/UserForm'
+
+
+//Router
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+//redux
+import { Provider } from 'react-redux';
+import store from './store';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>      
+      <Provider store={store}>
+        <Switch>
+          <Route exact path="/" component={AirInformation} />
+          <ProtectedRoute exact path="/form" component={Form} />
+        </Switch>
+      </Provider>
+    </Router>
   );
 }
 
